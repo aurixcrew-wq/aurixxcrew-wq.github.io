@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combo Huellitas | Adopción & Arte</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --pink-bright: #F884FA;
+            --pink-soft: #FEC7FF;
+            --sand: #D6C79C;
+            --cyan-light: #79D8F2;
+            --blue-soft: #79BEF2;
+            --purple-mid: #8D8DF7;
+            --brown: #524324;
+            --lavender: #BCA2E8;
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #fff8fe;
+            color: var(--brown);
+            font-family: 'Nunito', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Baloo 2', cursive;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--pink-bright), var(--purple-mid));
+            border-bottom: 4px solid var(--lavender);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(248,132,250,0.4);
+        }
+
+        .logo {
+            font-size: 1.9rem;
+            color: var(--white);
+            text-shadow: 2px 2px var(--brown);
+            letter-spacing: 1px;
+        }
+
+        nav ul { display: flex; list-style: none; gap: 18px; flex-wrap: wrap; }
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            background: var(--white);
+            color: var(--pink-bright);
+        }
+
+        /* HERO / LANDING */
+        .landing {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 5%;
+            background: linear-gradient(160deg, var(--pink-soft) 0%, var(--cyan-light) 50%, var(--lavender) 100%);
+            border-bottom: 8px solid var(--pink-bright);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .landing::before {
+            content: "🐾";
+            font-size: 12rem;
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            opacity: 0.12;
+        }
+
+        .landing::after {
+            content: "🐾";
+            font-size: 10rem;
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            opacity: 0.12;
+        }
+
+        .landing h1 {
+            font-size: 3.8rem;
+            margin-bottom: 15px;
+            color: var(--brown);
+            text-shadow: 2px 2px var(--white);
+            line-height: 1.1;
+        }
+
+        .landing p.subtitle {
+            font-size: 1.2rem;
+            color: var(--brown);
+            max-width: 600px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* IMAGEN HERO */
+        .hero-img {
+            width: 90%;
+            max-width: 800px;
+            border-radius: 20px;
+            border: 6px solid var(--white);
+            box-shadow: 0 10px 40px rgba(141,141,247,0.3);
+            margin: 30px auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .btn-main {
+            padding: 13px 28px;
+            background: var(--purple-mid);
+            border: none;
+            color: var(--white);
+            font-family: 'Baloo 2', cursive;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 8px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(141,141,247,0.4);
+        }
+
+        .btn-main:hover {
+            background: var(--pink-bright);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(248,132,250,0.5);
+        }
+
+        .btn-cyan {
+            background: var(--cyan-light);
+            color: var(--brown);
+        }
+        .btn-cyan:hover { background: var(--blue-soft); }
+
+        /* INVESTIGACIÓN PANEL */
+        .investigacion-panel {
+            display: none;
+            background: linear-gradient(135deg, var(--lavender), var(--pink-soft));
+            padding: 35px 5%;
+            margin: 0;
+            border-left: 6px solid var(--purple-mid);
+        }
+
+        .investigacion-panel h2 { color: var(--brown); margin-bottom: 15px; font-size: 1.8rem; }
+        .investigacion-panel p, .investigacion-panel li { color: var(--brown); line-height: 1.8; }
+        .investigacion-panel ul { margin-top: 10px; padding-left: 20px; }
+
+        /* CARRUSEL */
+        .carousel-container {
+            padding: 55px 5%;
+            background: linear-gradient(135deg, var(--blue-soft), var(--cyan-light));
+            text-align: center;
+        }
+
+        .carousel-container h2 {
+            color: var(--brown);
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+        }
+
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 5px solid var(--white);
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(121,190,242,0.4);
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-family: 'Baloo 2', cursive;
+            font-weight: 700;
+            transition: transform 0.5s ease-in-out;
+            color: var(--white);
+        }
+
+        .slide:nth-child(1) { background: linear-gradient(135deg, var(--pink-bright), var(--lavender)); }
+        .slide:nth-child(2) { background: linear-gradient(135deg, var(--purple-mid), var(--blue-soft)); }
+        .slide:nth-child(3) { background: linear-gradient(135deg, var(--sand), var(--brown)); }
+
+        /* CATÁLOGO */
+        .catalogo {
+            padding: 60px 5%;
+            background: #fff8fe;
+        }
+
+        .catalogo h2 {
+            color: var(--purple-mid);
+            margin-bottom: 35px;
+            font-size: 2.4rem;
+            text-align: center;
+        }
+
+        .grid-catalogo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: var(--white);
+            border: 2px solid var(--pink-soft);
+            padding: 22px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 4px 18px rgba(188,162,232,0.18);
+        }
+
+        .card:nth-child(3n+1) { border-color: var(--pink-bright); }
+        .card:nth-child(3n+2) { border-color: var(--cyan-light); }
+        .card:nth-child(3n+3) { border-color: var(--lavender); }
+
+        .card:hover {
+            border-color: var(--purple-mid);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(141,141,247,0.25);
+        }
+
+        .card::before {
+            content: "⭐ TOP";
+            position: absolute;
+            top: 10px;
+            right: -22px;
+            background: var(--pink-bright);
+            color: var(--white);
+            padding: 4px 38px;
+            transform: rotate(45deg);
+            font-size: 0.65rem;
+            font-weight: 800;
+        }
+
+        .card h3 { color: var(--brown); font-family: 'Baloo 2', cursive; font-size: 1.2rem; margin-bottom: 8px; }
+        .card p { color: #7a5c3a; font-size: 0.9rem; line-height: 1.6; }
+
+        .card button {
+            background: var(--lavender);
+            border: none;
+            color: var(--white);
+            padding: 7px 14px;
+            margin-top: 12px;
+            cursor: pointer;
+            border-radius: 20px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        .card button:hover { background: var(--purple-mid); }
+
+        /* PROYECTO TRANSMEDIA */
+        .proyecto-box {
+            background: linear-gradient(135deg, var(--sand), var(--brown));
+            padding: 65px 5%;
+        }
+
+        .proyecto-box h2 {
+            color: var(--white);
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .proyecto-box p.sub {
+            text-align: center;
+            color: var(--pink-soft);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .grid-transmedia {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .transmedia-item {
+            background: rgba(255,255,255,0.12);
+            padding: 22px 16px;
+            text-align: center;
+            border: 2px solid var(--pink-soft);
+            border-radius: 14px;
+            font-family: 'Baloo 2', cursive;
+            font-size: 1.05rem;
+            color: var(--white);
+            backdrop-filter: blur(4px);
+            transition: 0.3s;
+        }
+
+        .transmedia-item:hover {
+            background: var(--pink-bright);
+            border-color: var(--white);
+            transform: scale(1.05);
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, var(--purple-mid), var(--pink-bright));
+            padding: 55px 5%;
+            border-top: 4px solid var(--lavender);
+            text-align: center;
+        }
+
+        footer h2 { color: var(--white); font-size: 2rem; margin-bottom: 10px; }
+
+        .social-buttons {
+            margin: 22px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            width: 54px; height: 54px;
+            border-radius: 50%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--purple-mid);
+            font-weight: 800;
+            font-size: 0.85rem;
+            border: 3px solid var(--lavender);
+            transition: 0.3s;
+        }
+
+        .social-btn:hover {
+            background: var(--pink-soft);
+            transform: scale(1.15);
+            box-shadow: 0 0 18px rgba(255,255,255,0.5);
+        }
+
+        footer .info {
+            margin-top: 20px;
+            line-height: 2.2;
+            color: var(--white);
+        }
+        footer strong { color: var(--pink-soft); }
+
+        /* Responsive nav */
+        @media (max-width: 768px) {
+            .landing h1 { font-size: 2.4rem; }
+            nav ul { gap: 8px; }
+            nav a { font-size: 0.78rem; padding: 3px 7px; }
+            .logo { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">🐾 COMBO HUELLITAS</div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#quienes-somos">Quiénes Somos</a></li>
+                <li><a href="#agencia">Agencia</a></li>
+                <li><a href="#proposito">Propósito</a></li>
+                <li><a href="#catalogo">Productos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- LANDING -->
+    <section class="landing" id="inicio">
+        <h1>COMBO HUELLITAS</h1>
+        <p class="subtitle">Arte urbano y adopción responsable con amor por los animales 🐶🐱</p>
+
+        <!-- Imagen de animalitos subida por el usuario -->
+        <img
+            src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=1920"
+            onerror="this.src='https://images.unsplash.com/photo-1587300003388-59208cc962cb?q=80&w=1920'"
+            alt="Perritos y gatitos adorables del Combo Huellitas"
+            class="hero-img"
+        />
+
+        <div class="actions">
+            <button class="btn-main" onclick="toggleSection('investigacion')">INVESTIGACIÓN</button>
+            <a href="https://maps.google.com" target="_blank" style="text-decoration: none;">
+                <button class="btn-main btn-cyan">CARTOGRAFÍA</button>
+            </a>
+        </div>
+    </section>
+
+    <!-- PANEL INVESTIGACIÓN -->
+    <div id="investigacion" class="investigacion-panel">
+        <h2>TEORÍA Y PROBLEMÁTICA</h2>
+        <p>Análisis estadístico del sector: Prevención de sustancias psicoactivas en entornos comunitarios...</p>
+        <ul>
+            <li>Estadística A: 45% impacto positivo en talleres.</li>
+            <li>Teoría: Enfoque transmedia y participación ciudadana.</li>
+        </ul>
+    </div>
+
+    <!-- CARRUSEL -->
+    <section class="carousel-container">
+        <h2>🌟 COMBO HUELLITAS DESTACADOS</h2>
+        <div class="carousel">
+            <div class="slide">🎬 REELS DE IMPACTO</div>
+            <div class="slide">🎙️ PODCAST COMUNITARIO</div>
+            <div class="slide">🎨 TALLERES DE ARTE</div>
+        </div>
+        <div style="margin-top: 16px;">
+            <button onclick="moveSlide(-1)" class="btn-main">◀ Anterior</button>
+            <button onclick="moveSlide(1)" class="btn-main">Siguiente ▶</button>
+        </div>
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section class="catalogo" id="catalogo">
+        <h2>🛍️ CATÁLOGO DE PRODUCTOS</h2>
+        <div class="grid-catalogo" id="articulos-grid"></div>
+    </section>
+
+    <!-- PROYECTO TRANSMEDIA -->
+    <section class="proyecto-box" id="proposito">
+        <h2>🐾 EL PROYECTO TRANSMEDIA</h2>
+        <p class="sub">COMBO HUELLITAS en todos los canales</p>
+        <div class="grid-transmedia">
+            <div class="transmedia-item">🎙️ Podcast</div>
+            <div class="transmedia-item">🎬 Reels</div>
+            <div class="transmedia-item">🎵 TikToks</div>
+            <div class="transmedia-item">🎞️ Cortometrajes</div>
+            <div class="transmedia-item">🖼️ Exposición</div>
+            <div class="transmedia-item">🎨 Talleres</div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contacto">
+        <h2>📬 CONTACTO & REDES</h2>
+        <div class="social-buttons">
+            <a href="#" class="social-btn">FB</a>
+            <a href="#" class="social-btn">IG</a>
+            <a href="#" class="social-btn">YT</a>
+            <a href="#" class="social-btn">TK</a>
+        </div>
+        <div class="info">
+            <p>Email: <strong>prevencion@huellitas.com</strong></p>
+            <p>WhatsApp: <strong>+57 300 123 4567</strong></p>
+            <p>© 2026 COMBO HUELLITAS | Donando con amor 🐾♥</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Generar 12 artículos del catálogo
+        const productos = [
+            { nombre: "Collar Artesanal", desc: "Collar pintado a mano con motivos de huellas." },
+            { nombre: "Camiseta Huellitas", desc: "Camiseta con diseño exclusivo del combo." },
+            { nombre: "Bolso Tela", desc: "Bolso ecológico con arte urbano estampado." },
+            { nombre: "Sticker Pack", desc: "Set de stickers de los personajes del combo." },
+            { nombre: "Poster Graffiti", desc: "Impresión artística de alta calidad A3." },
+            { nombre: "Libreta Ilustrada", desc: "Cuaderno con ilustraciones de animales rescatados." },
+            { nombre: "Pin Metálico", desc: "Pin coleccionable de edición limitada." },
+            { nombre: "Manilla Solidaria", desc: "Manilla de tela con mensaje de adopción." },
+            { nombre: "Caja de Arte", desc: "Kit completo de materiales para talleres." },
+            { nombre: "Taza Huellitas", desc: "Taza cerámica con diseño exclusivo del proyecto." },
+            { nombre: "Llavero Pawprint", desc: "Llavero con huella en resina colorida." },
+            { nombre: "Agenda 2026", desc: "Agenda ilustrada con fechas de eventos del combo." }
+        ];
+
+        const grid = document.getElementById('articulos-grid');
+        productos.forEach((p, i) => {
+            const article = document.createElement('article');
+            article.className = 'card';
+            article.innerHTML = `
+                <h3>🐾 ${p.nombre}</h3>
+                <p>${p.desc}</p>
+                <button>Ver detalles</button>
+            `;
+            grid.appendChild(article);
+        });
+
+        // 2. Carrusel
+        let currentSlide = 0;
+        function moveSlide(direction) {
+            const slides = document.querySelectorAll('.slide');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides.forEach((slide) => {
+                slide.style.transform = `translateX(-${currentSlide * 100}%)`;
+            });
+        }
+
+        // 3. Toggle investigación
+        function toggleSection(id) {
+            const panel = document.getElementById(id);
+            panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+            if (panel.style.display === 'block') {
+                panel.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
